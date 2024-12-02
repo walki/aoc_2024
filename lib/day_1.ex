@@ -19,4 +19,17 @@ defmodule Day1 do
     |> Enum.map(fn {x, y} -> abs(x - y) end)
     |> Enum.sum()
   end
+
+  def find_similarity_score({left, right}) do
+    counts = find_right_counts(right)
+
+    left
+    |> Enum.map(fn l -> l * Map.get(counts, l, 0) end)
+    |> Enum.sum()
+  end
+
+  def find_right_counts(right) do
+    right
+    |> Enum.reduce(%{}, fn r, acc -> Map.update(acc, r, 1, fn x -> x + 1 end) end)
+  end
 end

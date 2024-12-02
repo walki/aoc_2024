@@ -1,6 +1,7 @@
 # Aoc2024
 
-**TODO: Add description**
+## Solutions for the advent of code 2024
+https://adventofcode.com/2024
 
 ## Installation
 
