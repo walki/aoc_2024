@@ -80,7 +80,7 @@ defmodule Day5Test do
 
   @tag :pending
   test "find_error_rules" do
-    {rules, updates} = Day5.get_rules_and_updates("day5test")
+    {rules, _updates} = Day5.get_rules_and_updates("day5test")
 
     assert [{97, 75}] == Day5.find_error_rules([75, 97, 47, 61, 53], rules)
   end

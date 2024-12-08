@@ -26,3 +26,5 @@ aoc_2024-*.tar
 /tmp/
 
 /input/*
+
+/output/*
