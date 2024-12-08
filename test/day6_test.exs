@@ -1,11 +1,13 @@
 defmodule Day6Test do
   use ExUnit.Case
 
+  @tag :pending
   test "read_input" do
     input = Day6.read_input("day6test")
     assert 10 == length(input.map)
   end
 
+  @tag :pending
   test "find_starting_position" do
     input = Day6.read_input("day6test")
 
@@ -19,6 +21,7 @@ defmodule Day6Test do
     assert 8 == length(obst)
   end
 
+  @tag :pending
   test "find_all_obstructions" do
     input = Day6.read_input("day6test")
 
@@ -28,6 +31,7 @@ defmodule Day6Test do
     assert Enum.any?(obsts, fn x -> %{row: 6, col: 1} end)
   end
 
+  @tag :pending
   test "obstruction_in_front" do
     obstructions = [
       %{row: 9, col: 6},
@@ -47,6 +51,7 @@ defmodule Day6Test do
     refute Day6.obstruction_in_front?(%{loc: %{row: 1, col: 0}, dir: "^"}, obstructions)
   end
 
+  @tag :pending
   test "next_move" do
     obstructions = [
       %{row: 9, col: 6},
@@ -80,6 +85,7 @@ defmodule Day6Test do
     assert ">" == updated.player.dir
   end
 
+  @tag :pending
   test "run_guard" do
     input = Day6.read_input("day6test2")
     start = Day6.find_starting_positions(input)
@@ -98,7 +104,7 @@ defmodule Day6Test do
     assert Enum.any?(visited, fn x -> x.row == 5 && x.col == 0 end)
   end
 
-  # @tag :pending
+  @tag :pending
   test "run_guard_for_real" do
     input = Day6.read_input("day6input")
 
@@ -116,6 +122,7 @@ defmodule Day6Test do
     ending
   end
 
+  @tag :pending
   test "quick_map" do
     input = Day6.read_input("day6test2")
     start = Day6.find_starting_positions(input)
@@ -123,4 +130,33 @@ defmodule Day6Test do
     assert "....#.....\r\n.........#\r\n..........\r\n..#.......\r\n.......#..\r\n....<.....\r\n.#........\r\n........#.\r\n#.........\r\n......#..." =
              Day6.get_print_map_quick(start, 10, 10)
   end
+
+  @tag :pending
+  test "poss_locations" do
+    input = Day6.read_input("day6test")
+    start = Day6.find_starting_positions(input)
+
+    poss = Day6.poss_locations(start)
+    assert length(poss) == 91
+  end
+
+  @tag :pending
+  test "find_cycles" do
+    input = Day6.read_input("day6test")
+    start = Day6.find_starting_positions(input)
+
+    cycle_locs = Day6.find_cycles(start, "day2test_out", 5000)
+    assert length(cycle_locs) == 6
+  end
+
+  @tag :pending
+  test "find_cycles_for_real" do
+    input = Day6.read_input("day6input")
+    start = Day6.find_starting_positions(input)
+
+    cycle_locs = Day6.find_cycles(start, "day2_out", 5_000_000)
+    assert length(cycle_locs) == 1888
+  end
+
+
 end

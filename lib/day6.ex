@@ -97,28 +97,87 @@ defmodule Day6 do
     %{state | player: player}
   end
 
+  def find_cycles(start, file_name, min) do
+    # poss = poss_locations(start)
+
+    ending = Day6.run_guard(start, file_name, min)
+    poss = ending.visited
+
+    poss
+    |> Enum.reduce([], fn p, cycle_locs ->
+      added = add_obs(start, p)
+      ending = run_guard(added, file_name, min)
+      case ending.in_cycle do
+        true -> [p | cycle_locs]
+        false -> cycle_locs
+      end
+    end)
+  end
+
+  def add_obs(state, loc) do
+    %{state | obstructions: [loc | state.obstructions]}
+  end
+
+  def poss_locations(state) do
+    rl = row_length(state)
+    cl = col_length(state)
+
+    0..(rl - 1)
+    |> Enum.to_list()
+    |> Enum.reduce([], fn row, acc ->
+      0..(cl - 1)
+      |> Enum.to_list()
+      |> Enum.reduce(acc, fn col, acc ->
+        loc = %{row: row, col: col}
+
+        case occupado?(state, loc) do
+          false -> [loc | acc]
+          true -> acc
+        end
+      end)
+    end)
+  end
+
+  def occupado?(state, loc) do
+    state.player.loc == loc ||
+      Enum.any?(state.obstructions, fn x -> x.row == loc.row && x.col == loc.col end)
+  end
+
+  def row_length(state) do
+    state.map |> Enum.at(0) |> String.length()
+  end
+
+  def col_length(state) do
+    length(state.map)
+  end
+
   def run_guard(state, file_name, min) do
     moved = next_move(state)
 
     print_state_file(moved, file_name, min)
 
     case in_cycle?(moved) do
-      true ->  %{moved | in_cycle: true}
+      true ->
+        %{moved | in_cycle: true}
+
       false ->
-      case on_map?(moved.player.loc, moved.map) do
-        false ->
-          %{moved | on_map: false}
+        case on_map?(moved.player.loc, moved.map) do
+          false ->
+            %{moved | on_map: false}
 
-        true ->
-          added_location = %{
-            moved
-            | visited: MapSet.put(moved.visited, moved.player.loc),
-              visited_with_dir:
-                MapSet.put(moved.visited_with_dir, %{loc: moved.player.loc, dir: moved.player.dir})
-          }
+          true ->
+            added_location = %{
+              moved
+              | visited: MapSet.put(moved.visited, moved.player.loc),
+                visited_with_dir:
+                  MapSet.put(moved.visited_with_dir, %{
+                    loc: moved.player.loc,
+                    dir: moved.player.dir
+                  })
+            }
 
-          run_guard(added_location, file_name, min)
-      end
+            run_guard(added_location, file_name, min)
+        end
     end
   end
 
