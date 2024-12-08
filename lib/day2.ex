@@ -1,15 +1,14 @@
 defmodule Day2 do
-
   def read_input(name) do
     File.read!("./input/#{name}")
     |> String.split("\r\n", trim: true)
     |> Enum.map(fn report ->
-              String.split(report, " ", trim: true)
-              |> Enum.map(fn l ->
-                {level, _} = Integer.parse(l)
-                level
-              end)
-            end)
+      String.split(report, " ", trim: true)
+      |> Enum.map(fn l ->
+        {level, _} = Integer.parse(l)
+        level
+      end)
+    end)
   end
 
   def get_safe_reports(name) do
@@ -36,15 +35,15 @@ defmodule Day2 do
   def do_check_bounds([_]), do: true
 
   def do_check_bounds([a, b | rest]) do
-    case with_in_bounds?(a,b) do
+    case with_in_bounds?(a, b) do
       true -> do_check_bounds([b | rest])
       false -> false
     end
   end
 
-  def with_in_bounds?(a,b) when a >= b + 1 and a <= b + 3, do: true
-  def with_in_bounds?(b,a) when a >= b + 1 and a <= b + 3, do: true
-  def with_in_bounds?(_,_), do: false
+  def with_in_bounds?(a, b) when a >= b + 1 and a <= b + 3, do: true
+  def with_in_bounds?(b, a) when a >= b + 1 and a <= b + 3, do: true
+  def with_in_bounds?(_, _), do: false
 
   def prob_dampener(levels) do
     case safe?(levels) do
@@ -54,11 +53,11 @@ defmodule Day2 do
   end
 
   def do_dampening(start, []), do: safe?(start)
+
   def do_dampening(start, [h | rest]) do
     case safe?(start ++ rest) do
       true -> true
-      false -> do_dampening( start ++ [h], rest)
+      false -> do_dampening(start ++ [h], rest)
     end
   end
-
 end

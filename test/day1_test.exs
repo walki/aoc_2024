@@ -19,7 +19,7 @@ defmodule Day1Test do
       Day1.read_input("day1input")
       |> Day1.find_distance()
 
-    assert distance == 1506483
+    assert distance == 1_506_483
   end
 
   @tag :pending
@@ -35,6 +35,6 @@ defmodule Day1Test do
       Day1.read_input("day1input")
       |> Day1.find_similarity_score()
 
-    assert similarity == 23126924
+    assert similarity == 23_126_924
   end
 end

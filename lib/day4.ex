@@ -95,7 +95,6 @@ defmodule Day4 do
     end
   end
 
-
   # Part 2
 
   def solve_part2(name) do

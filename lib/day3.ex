@@ -1,5 +1,4 @@
 defmodule Day3 do
-
   def read_input(name) do
     File.read!("./input/#{name}")
   end
@@ -24,31 +23,38 @@ defmodule Day3 do
   end
 
   def find_dos(corr) do
-    find_dont(corr, %{ dos: [], donts: []})
+    find_dont(corr, %{dos: [], donts: []})
   end
 
   def find_dont("", results), do: results
+
   def find_dont(corr, results) do
     case Regex.run(~r/(.*?)don't\(\)(.*)/s, corr) do
-    [_, dos, donts] ->
-      updated = %{dos: results.dos ++ [dos], donts: results.donts}
-      find_do(donts, updated)
-    nil -> %{dos: results.dos ++ [corr], donts: results.donts}
+      [_, dos, donts] ->
+        updated = %{dos: results.dos ++ [dos], donts: results.donts}
+        find_do(donts, updated)
+
+      nil ->
+        %{dos: results.dos ++ [corr], donts: results.donts}
     end
   end
 
   def find_do("", results), do: results
+
   def find_do(corr, results) do
     case Regex.run(~r/(.*?)do\(\)(.*)/s, corr) do
-    [_, donts, dos] ->
-      updated = %{dos: results.dos, donts: results.donts ++ [donts]}
-      find_dont(dos, updated)
-    nil -> %{dos: results.dos, donts: results.donts ++ [corr]}
+      [_, donts, dos] ->
+        updated = %{dos: results.dos, donts: results.donts ++ [donts]}
+        find_dont(dos, updated)
+
+      nil ->
+        %{dos: results.dos, donts: results.donts ++ [corr]}
     end
   end
 
   def find_enabled_muls(corr) do
     %{dos: dos} = find_dos(corr)
+
     dos
     |> Enum.map(&find_muls/1)
     |> List.flatten()
@@ -60,5 +66,4 @@ defmodule Day3 do
     read_input(name)
     |> find_enabled_muls()
   end
-
 end
