@@ -75,13 +75,15 @@ defmodule Day8Test do
     input = read_input("day8test")
     updated = find_antennas(input)
 
-    assert 14 == find_antinodes_for_antenna(updated)
+    # assert 14 == find_antinodes_for_antenna(updated)
+    assert 34 == find_antinodes_for_antenna(updated)
   end
 
   test "find_antinodes_for_antenna real" do
     input = read_input("day8input")
     updated = find_antennas(input)
 
-    assert 318 == find_antinodes_for_antenna(updated)
+    # assert 318 == find_antinodes_for_antenna(updated)
+    assert 1126 == find_antinodes_for_antenna(updated)
   end
 end

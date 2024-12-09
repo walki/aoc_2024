@@ -54,6 +54,32 @@ defmodule Day8 do
     maybe_add_node(%{r: an2_r, c: an2_c}, row_len, col_len, nodes)
   end
 
+  def find_antinodes_part2(loc1, loc2, row_len, col_len) do
+    dx = loc1.c - loc2.c
+    dy = loc1.r - loc2.r
+
+    nodes = go_positive(loc1, dx, dy, row_len, col_len, [loc1, loc2])
+    go_negative(loc1, dx, dy, row_len, col_len, nodes)
+  end
+
+  def go_positive(loc1, dx, dy, row_len, col_len, nodes) do
+    next = %{c: loc1.c + dx, r: loc1.r + dy}
+
+    case within_bounds?(next.r, next.c, row_len, col_len) do
+      true -> go_positive(next, dx, dy, row_len, col_len, [next | nodes])
+      _ -> nodes
+    end
+  end
+
+  def go_negative(loc1, dx, dy, row_len, col_len, nodes) do
+    next = %{c: loc1.c - dx, r: loc1.r - dy}
+
+    case within_bounds?(next.r, next.c, row_len, col_len) do
+      true -> go_negative(next, dx, dy, row_len, col_len, [next | nodes])
+      _ -> nodes
+    end
+  end
+
   def maybe_add_node(%{r: row, c: col} = node, row_len, col_len, nodes) do
     case within_bounds?(row, col, row_len, col_len) do
       true -> [node | nodes]
@@ -93,7 +119,8 @@ defmodule Day8 do
   def do_find_curr_antinodes(state, curr, [next | rest], antinodes) do
     row_len = row_length(state)
     col_len = col_length(state)
-    curr_ans = find_antinodes(curr, next, row_len, col_len)
+    # curr_ans = find_antinodes(curr, next, row_len, col_len)
+    curr_ans = find_antinodes_part2(curr, next, row_len, col_len)
     do_find_curr_antinodes(state, curr, rest, [curr_ans | antinodes])
   end
 
