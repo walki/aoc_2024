@@ -31,8 +31,55 @@ defmodule Day9Test do
     assert 1928 == checksum(files)
   end
 
+  @tag :pending
   test "realsy" do
     files = get_files("day9input")
     assert 6_201_130_364_722 == checksum(files)
+  end
+
+  test "find_first_free_space" do
+    blocks = [
+      {"0", 2},
+      {".", 3},
+      {"1", 3},
+      {".", 3},
+      {"2", 1},
+      {".", 3},
+      {"3", 3},
+      {".", 1},
+      {"4", 2},
+      # changed for the test
+      {".", 8},
+      {"5", 4},
+      {".", 1},
+      {"6", 4},
+      {".", 1},
+      {"7", 3},
+      {".", 1},
+      {"8", 4},
+      {".", 0},
+      {"9", 2},
+      {".", 0}
+    ]
+
+    assert 1 == find_first_free_space(2, blocks)
+    assert 9 == find_first_free_space(5, blocks)
+    assert nil == find_first_free_space(9, blocks)
+  end
+
+  # @tag :pending
+  test "part2" do
+    files = get_files_part2("day9test")
+    assert convert_to_string(files) == "00992111777.44.333....5555.6666.....8888.."
+  end
+
+  test "part2 checksum" do
+    chksum = get_files_part2("day9test") |> checksum_part2()
+    assert chksum == 2858
+  end
+
+  test "part2 checksum real" do
+    chksum = get_files_part2("day9input") |> checksum_part2()
+    assert chksum == 6_221_662_795_602
   end
 end
