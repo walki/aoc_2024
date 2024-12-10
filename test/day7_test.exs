@@ -3,6 +3,7 @@ defmodule Day7Test do
 
   import Day7
 
+  @tag :pending
   test "read_input" do
     input = read_input("day7test")
 
@@ -10,18 +11,21 @@ defmodule Day7Test do
     assert %{answer: 190, operands: [10, 19]} == input |> Enum.at(0)
   end
 
+  @tag :pending
   test "evaluate" do
     assert 190 == evaluate(%{answer: 190, operands: [10, 19]})
     assert 3267 == evaluate(%{answer: 3267, operands: [81, 40, 27]})
     assert 0 == evaluate(%{answer: 83, operands: [17, 5]})
   end
 
+  @tag :pending
   test "calibration_results" do
     input = read_input("day7test")
 
     assert 3749 == calibration_results(input)
   end
 
+  @tag :pending
   test "calibration_results for real" do
     input = read_input("day7input")
 
@@ -29,6 +33,7 @@ defmodule Day7Test do
   end
 
   # Part 2
+  @tag :pending
   test "evaluate_concat" do
     assert 190 == evaluate_concat(%{answer: 190, operands: [10, 19]})
     assert 3267 == evaluate_concat(%{answer: 3267, operands: [81, 40, 27]})
@@ -37,12 +42,14 @@ defmodule Day7Test do
     assert 192 == evaluate_concat(%{answer: 192, operands: [17, 8, 14]})
   end
 
+  @tag :pending
   test "calib part 2" do
     input = read_input("day7test")
 
     assert 11387 == calibration_results_part2(input)
   end
 
+  @tag :pending
   test "calib part 2 for real" do
     input = read_input("day7input")
 

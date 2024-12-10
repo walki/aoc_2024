@@ -3,6 +3,7 @@ defmodule Day8Test do
 
   import Day8
 
+  @tag :pending
   test "read_input" do
     input = read_input("day8test")
 
@@ -29,6 +30,7 @@ defmodule Day8Test do
     assert %{r: 5, c: 6} in antennas_A
   end
 
+  @tag :pending
   test "find_antinodes" do
     loc1 = %{r: 3, c: 4}
     loc2 = %{r: 5, c: 5}
@@ -38,6 +40,7 @@ defmodule Day8Test do
     assert [antinode1] == find_antinodes(loc1, loc2, 6, 6)
   end
 
+  @tag :pending
   test "find_all_antinodes" do
     state = %{map: [
       "............",
@@ -71,6 +74,7 @@ defmodule Day8Test do
     assert antinode4 in ans
   end
 
+  @tag :pending
   test "find_antinodes_for_antenna" do
     input = read_input("day8test")
     updated = find_antennas(input)
@@ -79,6 +83,7 @@ defmodule Day8Test do
     assert 34 == find_antinodes_for_antenna(updated)
   end
 
+  @tag :pending
   test "find_antinodes_for_antenna real" do
     input = read_input("day8input")
     updated = find_antennas(input)

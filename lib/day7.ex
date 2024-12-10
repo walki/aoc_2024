@@ -1,4 +1,5 @@
 defmodule Day7 do
+
   def read_input(name) do
     File.read!("./input/#{name}")
     |> String.split("\r\n", trim: true)
