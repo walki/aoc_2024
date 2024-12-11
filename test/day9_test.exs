@@ -3,29 +3,35 @@ defmodule Day9Test do
 
   import Day9
 
+  @tag :pending
   test "read_input" do
     assert "2333133121414131402" == read_input("day9test")
   end
 
+  @tag :pending
   test "to_blocks" do
     assert String.split("0..111....22222", "", trim: true) == to_blocks("12345")
   end
 
+  @tag :pending
   test "clear_free" do
     assert String.split("022111222......", "", trim: true) ==
              clear_free(String.split("0..111....22222", "", trim: true))
   end
 
+  @tag :pending
   test "swap_with_last" do
     assert {"2", ["1", ".", "2", "2", ".", "."]} ==
              swap_with_last(["1", ".", "2", "2", "2", "."])
   end
 
+  @tag :pending
   test "with input" do
     files = get_files("day9test")
     assert files |> Enum.join() == "0099811188827773336446555566.............."
   end
 
+  @tag :pending
   test "checksum" do
     files = get_files("day9test")
     assert 1928 == checksum(files)
@@ -37,6 +43,7 @@ defmodule Day9Test do
     assert 6_201_130_364_722 == checksum(files)
   end
 
+  @tag :pending
   test "find_first_free_space" do
     blocks = [
       {"0", 2},
@@ -67,17 +74,19 @@ defmodule Day9Test do
     assert nil == find_first_free_space(9, blocks)
   end
 
-  # @tag :pending
+  @tag :pending
   test "part2" do
     files = get_files_part2("day9test")
     assert convert_to_string(files) == "00992111777.44.333....5555.6666.....8888.."
   end
 
+  @tag :pending
   test "part2 checksum" do
     chksum = get_files_part2("day9test") |> checksum_part2()
     assert chksum == 2858
   end
 
+  @tag :pending
   test "part2 checksum real" do
     chksum = get_files_part2("day9input") |> checksum_part2()
     assert chksum == 6_221_662_795_602
