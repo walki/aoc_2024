@@ -42,7 +42,7 @@ defmodule Day10 do
     find_row_heads(rest, curr + 1, idxs)
   end
 
-  def find_eligible_neighbors(9, {row, col}, state), do: {:done, {row, col}}
+  def find_eligible_neighbors(9, {row, col}, _state), do: {:done, {row, col}}
 
   def find_eligible_neighbors(val, {row, col}, state) do
     top = check(val + 1, {row - 1, col}, state)
